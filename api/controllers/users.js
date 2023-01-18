@@ -35,7 +35,32 @@ const findUser = async (req, res) => {
   }
 }
 
+const friendRequest = async (req,res) => {
+    profile_id = req.params.id
+    requester_id = req.body.requester
+    console.log(requester_id)
+    field = req.body.field
+    if (field === 'request') {
+      const user = await User.findOne({_id: profile_id})
+      const friendRequests = user.friendRequests.toObject()
+      if (!friendRequests.includes(requester_id)) {
+        update = await User.findOneAndUpdate({_id: profile_id}, {$push: {friendRequests: requester_id}})
+      }
+    } else if (field === 'accept') {
+      update = await User.findOneAndUpdate({_id: profile_id}, {$pull: {friendRequests: requester_id}})
+      update1 = await User.findOneAndUpdate({_id: profile_id}, {$push: {friends: requester_id}})
+    } else if (field === 'reject') {
+      update = await User.findOneAndUpdate({_id: profile_id}, {$pull: {friendRequests: requester_id}})
+    } else {
+      res.status(400).json({ message: error.message})
+    }
+    const token = await TokenGenerator.jsonwebtoken(req.user_id)
+    res.status(200).json({ message: 'OK', token: token });
+  }
 
 
-module.exports = { signupUser, loginUser, findUser }
+
+
+
+module.exports = { signupUser, loginUser, findUser, friendRequest }
 

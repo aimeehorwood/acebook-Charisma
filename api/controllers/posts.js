@@ -38,6 +38,7 @@ const PostsController = {
     const token = await TokenGenerator.jsonwebtoken(req.user_id)
     res.status(200).json({ message: 'OK', token: token });
   },
+  
   FindUsersPosts: async (req, res) => {
     const id = req.params.id;
     const posts = await Post.find({ author: id });

@@ -104,8 +104,8 @@ const Post = ({post, setUpdated}) => {
       <article data-cy="post" key={ post._id }>
       <p id="userName">
         <Link to={`../profile/${post.author}`}>{userName}</Link>
-        </p>
-        <p>{post.message}</p>
+      </p>
+      <p>{post.message}</p>
       <p id="userName">{userName}</p><p>{ post.message }</p>
       <p className='timePosted'>Posted: {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
        <button onClick={handleLikes} id="like-button">
