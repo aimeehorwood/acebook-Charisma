@@ -108,7 +108,7 @@ const Post = ({post, setUpdated, myProfilePage}) => {
       }
   }
 
-  const firstComment = post.comments.length === 0 ? <p id ="first-comment">Be the first to make a comment!</p> :
+  const firstComment = post.comments.length === 0 ? <p id ="first-comment" style={{ fontSize: '13px' }}>Be the first to make a comment!</p> :
   <p className ="bubble-post">
     <Link to={`../profile/${post.comments[0].user_id}`}><b>{post.comments[0].name}</b></Link>: {post.comments[0].message}
     <br></br><br></br><i style={{ fontSize: '13px' }}>{formatDistanceToNow(new Date(post.comments[0].createdAt), {addSuffix: true})}</i>
