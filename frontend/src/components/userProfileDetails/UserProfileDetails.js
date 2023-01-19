@@ -5,13 +5,14 @@ import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
 import FriendsList from "../friendsList/FriendsList";
 import { useParams } from "react-router-dom";
+import EditUserDetails from "../editUserDetails/EditUserDetails";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState(null);
   const [updated, setUpdated] = useState(null);
-
+  const [edit, setEdit] = useState(false)
   const [friendsView, setFriendsView] = useState(false);
   const [myProfilePage, setMyProfilePage] = useState(null);
   const [friendshipStatus, setFriendshipStatus] = useState(null);
@@ -87,28 +88,50 @@ const Profile = () => {
       });
     }
   };
+  const handleEdit = () => {
+    setEdit(!edit)
+  }
 
   return (
     <>
       <div className="profile-details">
         <h1>My details</h1>
+        <br></br>
         <p>Name: {user && user.name}</p>
+        <br></br>
         <p>About me: {user && user.aboutMe}</p>
         <br></br>
-        <img src={image} id="profile-pics" alt="img" />
+<img src={image} id="profile-pics" alt="img" />
         <br></br><br></br>
-        {myProfilePage && <button onClick={viewFriends}>Friend List</button>}
-        <br></br>       
-      </div>
-      {!myProfilePage && friendshipStatus && `You and ${user.name} are friends`}
+        {myProfilePage && 
+        <div>
+          {!friendsView && <button id="like-button" onClick={handleEdit}>{edit? 'Close editing form' : 'Edit profile deatils'}</button>}
+          {!edit && <button id="like-button" onClick={viewFriends}>{friendsView? 'Close friends list' : 'Friends List'}</button>}
+        </div>}
+          <br></br>
+        <img src={image} id="profile-pics" alt="img" />
+
+        {!myProfilePage && friendshipStatus && 
+        <p>{`You and ${user.name} are friends`}</p>
+        }
+
       {!myProfilePage &&
         friendshipRequestStatus &&
-        `You and have requested to be friends with ${user.name}`}
+        <p>{`You and have requested to be friends with ${user.name}`}</p>
+        }
       {!myProfilePage && !friendshipRequestStatus && !friendshipStatus && (
-        <button onClick={(event) => handleFriendRequest(event, user._id)}>
+        <><p></p>
+        <button id="like-button" onClick={(event) => handleFriendRequest(event, user._id)}>
           Send friend request
         </button>
+        </>
       )}
+      
+      {
+        edit && (
+          <EditUserDetails setEdit={setEdit} setUpdated={setUpdated} currentUser={user} />
+        )
+      }
 
       {friendsView && (
         <FriendsList
@@ -119,7 +142,8 @@ const Profile = () => {
           currentUser={user}
         />
       )}
-      {!friendsView && (
+      </div>
+      {!(friendsView || edit) && (
         <div className="user-posts">
           <h2 id="post" className="feedHeader">
             My Posts
@@ -132,7 +156,9 @@ const Profile = () => {
                   return new Date(postB.createdAt) - new Date(postA.createdAt);
                 })
                 .map((post) => (
-                  <Post setUpdated={setUpdated} post={post} key={post._id} />
+                  <div key={post._id}>
+                  <Post setUpdated={setUpdated} myProfilePage={myProfilePage} post={post} />
+                  </div>
                 ))}
           </div>
         </div>

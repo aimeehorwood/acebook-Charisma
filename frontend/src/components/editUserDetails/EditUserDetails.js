@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 
-const SignUpForm = ({ navigate }) => {
+const EditUserDetails = ({ currentUser, setEdit, setUpdated }) => {
   const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [aboutMe, setAboutMe] = useState("");
-  const [image, setImage] = useState(
-    "https://www.shareicon.net/data/128x128/2016/11/28/857788_animal_512x512.png"
-  );
+  const [email, setEmail] = useState(currentUser.email);
+  const [name, setName] = useState(currentUser.name);
+  const [aboutMe, setAboutMe] = useState(currentUser.aboutMe);
+  const [image, setImage] = useState(currentUser.image);
+  const [token, setToken] = useState(window.localStorage.getItem('token'))
 
   const handleImageChange = (event) => {
-    setImage(event.target.value);
+    if (event.target.value==="noChange") {
+      return
+    } else {
+      setImage(event.target.value);
+    }
   };
 
   const handleNameChange = (event) => {
@@ -26,34 +28,31 @@ const SignUpForm = ({ navigate }) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
   const handleSubmit = async (event) => {
     setError(null);
     event.preventDefault();
 
-    const response = await fetch("/users/signup", {
-      method: "post",
+    const response = await fetch(`/users/profile/${currentUser._id}`, {
+      method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name: name,
         email: email,
-        password: password,
         aboutMe: aboutMe,
-        friends: [],
         image: image,
       }),
     });
+
     const data = await response.json();
-    if (response.status === 201) {
-      navigate("/login");
+    if (response.status === 200) {
+      setToken(response.token)
+      setUpdated(true)
+      setEdit(false)
     } else {
       setError(data.error);
-      navigate("/signup");
     }
   };
 
@@ -76,20 +75,14 @@ const SignUpForm = ({ navigate }) => {
         onChange={handleAboutMeChange}
       />
       <input
+        required
         placeholder="Email"
         id="email"
         type="text"
         value={email}
         onChange={handleEmailChange}
       />
-      <input
-        placeholder="Password"
-        id="password"
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-      <input id="submit" type="submit" value="Submit" />
+      <input id="like-button" type="submit" value="Submit" />
       {error && <div className="error">{error}</div>}
       <div>
         <h5> Select a Profile Picture for your Profile </h5>
@@ -117,15 +110,15 @@ const SignUpForm = ({ navigate }) => {
             "https://www.shareicon.net/data/128x128/2017/01/06/868266_bug_512x512.png"
           }
           alt="profile"
-        />
-
-        {/* <button id="profile" onClick={handlePictureChange}> Select me </button> */}
+        />        
+        
         <select id="selectList" onChange={handleImageChange}>
-           {" "}
+          <option value="noChange">
+            Don't change Profile picture
+          </option>
           <option value="https://www.shareicon.net/data/128x128/2016/11/28/857788_animal_512x512.png">
             Option 1
           </option>
-           {" "}
           <option value="https://www.shareicon.net/data/128x128/2016/11/28/857792_animal_512x512.png">
             Option 2
           </option>
@@ -141,4 +134,4 @@ const SignUpForm = ({ navigate }) => {
   );
 };
 
-export default SignUpForm;
+export default EditUserDetails;

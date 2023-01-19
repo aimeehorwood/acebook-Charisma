@@ -2,9 +2,23 @@
 
 * {
   margin: 0;
-  font-family: "Quicksand";
+  font-family: 'Quicksand';
   background-image: "./acebook.png";
 }
+
+#form input {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+#form input#aboutMe {
+  height: 100px;
+  width: 80%;
+}
+
 
 .navbar {
     background-color: black;
