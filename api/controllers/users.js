@@ -47,10 +47,15 @@ const friendRequest = async (req,res) => {
         update = await User.findOneAndUpdate({_id: profile_id}, {$push: {friendRequests: requester_id}})
       }
     } else if (field === 'accept') {
+      update = await User.findOneAndUpdate({_id: requester_id}, {$pull: {friendRequests: profile_id}})
       update = await User.findOneAndUpdate({_id: profile_id}, {$pull: {friendRequests: requester_id}})
       update1 = await User.findOneAndUpdate({_id: profile_id}, {$push: {friends: requester_id}})
+      update2 = await User.findOneAndUpdate({_id: requester_id}, {$push: {friends: profile_id}})
     } else if (field === 'reject') {
       update = await User.findOneAndUpdate({_id: profile_id}, {$pull: {friendRequests: requester_id}})
+    } else if (field === 'delete') {
+      update = await User.findOneAndUpdate({_id: profile_id}, {$pull: {friends: requester_id}})
+      update = await User.findOneAndUpdate({_id: requester_id}, {$pull: {friends: profile_id}})
     } else {
       res.status(400).json({ message: error.message})
     }
