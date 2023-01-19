@@ -6,11 +6,15 @@ import Post from "../post/Post";
 import { useParams } from 'react-router-dom';
 
 
+
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState(null);
   const [updated, setUpdated] = useState(null)
+  const [image, setImageUrl] = useState("");
+
+
   let { id } = useParams();
   useEffect(() => {
     if (token) {
@@ -19,6 +23,7 @@ const Profile = () => {
         .then(async (data) => {
           setToken(window.localStorage.getItem("token"));
           setUser(data.user);
+          setImageUrl(data.user.image);
         });
     }
   }, [id]);
@@ -48,6 +53,7 @@ const Profile = () => {
       <h1>My details</h1>
       <p>Name: {user && user.name}</p>
       <p>About me: {user && user.aboutMe}</p>
+      <img src={image} id="profile-pics" alt="img" />
       <button>Friends List</button>
     </div>
       
