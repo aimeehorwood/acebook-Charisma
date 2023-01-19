@@ -106,6 +106,29 @@
     margin: auto;
   }
 
+ /* CSS for first post but breaks all posts :( 
+
+  .bubble-post {
+    background-color: #bac9a9;
+    border-radius: 20px;
+    border-color: black;
+    padding: 10px;
+    position: relative;
+    width: 200px; 
+    height: 100px; 
+  }
+
+  .bubble-post:before {
+    content: "";
+    position: absolute;
+    bottom: -10px; 
+    left: 20px; 
+    border-top: 10px solid #bac9a9;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+  */
+  
   p {
     padding: 10px;
     margin-left: -5px;

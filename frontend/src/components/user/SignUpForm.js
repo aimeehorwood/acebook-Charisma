@@ -119,7 +119,7 @@ const SignUpForm = ({ navigate }) => {
           alt="profile"
         />
 
-        {/* <button id="profile" onClick={handlePictureChange}> Select me </button> */}
+
         <select id="selectList" onChange={handleImageChange}>
            {" "}
           <option value="https://www.shareicon.net/data/128x128/2016/11/28/857788_animal_512x512.png">

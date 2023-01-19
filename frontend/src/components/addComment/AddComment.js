@@ -31,14 +31,11 @@ const AddComment = ({setUpdated}) => {
   
   return (
     <div>
-    <p>Comments:</p>
         <div id='comments' role="comments">
-          {console.log(comments)}
         <p>{comments}</p>
               <p>...</p>
         </div>
     <div id='add-comment'>
-      <h2>Add Comment</h2>
       <form id ='input' onSubmit={handleSubmit}>
         <textarea id='input' rows="2" value={body} onChange={(event) => setBody(event.target.value)} />
         <button id="add" type="submit" value="Submit">Comment</button>
