@@ -11,9 +11,9 @@ import { useNavigate, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <>
+    <>    
       <Navbar />
-      <div className="container">
+      <div>
         <Routes>
           <Route path="/" element={<Home navigate={useNavigate()} />} />
           <Route path="/posts" element={<Feed navigate={useNavigate()} />} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./UserProfileDetails.css";
+import './UserProfileDetails.css';
 import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
 import FriendsList from "../friendsList/FriendsList";
@@ -101,6 +101,8 @@ const Profile = () => {
         <br></br>
         <p>About me: {user && user.aboutMe}</p>
         <br></br>
+<img src={image} id="profile-pics" alt="img" />
+        <br></br><br></br>
         {myProfilePage && 
         <div>
           {!friendsView && <button id="like-button" onClick={handleEdit}>{edit? 'Close editing form' : 'Edit profile deatils'}</button>}
@@ -112,6 +114,7 @@ const Profile = () => {
         {!myProfilePage && friendshipStatus && 
         <p>{`You and ${user.name} are friends`}</p>
         }
+
       {!myProfilePage &&
         friendshipRequestStatus &&
         <p>{`You and have requested to be friends with ${user.name}`}</p>

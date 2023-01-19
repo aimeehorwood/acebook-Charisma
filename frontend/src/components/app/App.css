@@ -3,35 +3,7 @@
 * {
   margin: 0;
   font-family: 'Quicksand';
-}
-
-.img {
-  position: absolute;
-}
-
-.navbar {
-  background-color: rgba(11, 115, 227, 0.702);
-  padding: 40px;
-  display: flex;
-  font-weight: bold;
-  justify-content: right;
-}
-
-.links li {
-  list-style: none;
-  display: inline-block;
-  margin-right: 15px;
-}
-
-.links a {
-  color: white;
-  text-decoration: none;
-}
-
-#form {
-  margin-top: 10px;
-  width: 80%;
-  padding: 20px;
+  background-image: "./acebook.png";
 }
 
 #form input {
@@ -46,3 +18,25 @@
   height: 100px;
   width: 80%;
 }
+
+
+.navbar {
+    background-color: black;
+    padding: 25px;
+    display: flex;
+    font-weight: bold;
+    justify-content: left;
+  }
+
+.links li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 15px;
+    margin-top: 25px;
+  }
+  
+  .links a {
+    color: white;
+    text-decoration: none;
+  }
+
