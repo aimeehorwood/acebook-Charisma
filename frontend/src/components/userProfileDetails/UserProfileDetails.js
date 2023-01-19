@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./UserProfileDetails.css";
+import './UserProfileDetails.css';
 import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
 import FriendsList from "../friendsList/FriendsList";
@@ -94,10 +94,11 @@ const Profile = () => {
         <h1>My details</h1>
         <p>Name: {user && user.name}</p>
         <p>About me: {user && user.aboutMe}</p>
-
-        {myProfilePage && <button onClick={viewFriends}>Friends List</button>}
-
+        <br></br>
         <img src={image} id="profile-pics" alt="img" />
+        <br></br><br></br>
+        {myProfilePage && <button onClick={viewFriends}>Friend List</button>}
+        <br></br>       
       </div>
       {!myProfilePage && friendshipStatus && `You and ${user.name} are friends`}
       {!myProfilePage &&

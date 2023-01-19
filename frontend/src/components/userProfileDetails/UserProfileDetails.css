@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  font-family: "Quicksand";
+}
+
+button {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.feedHeader {
+  margin-left: auto;
+  margin-top: 10px;
+  font-family: "Quicksand";
+  width: 67%;
+  padding: 10px;
+  text-align: left;
+}
+
 .profile-details {
   text-align: center;
   padding: 10px 16px;
@@ -12,6 +37,7 @@
   border-radius: 20%;
   border-style:solid;
   margin-right: 10px;
+  margin-left:10px;
  
  
 }

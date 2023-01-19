@@ -93,7 +93,7 @@ const FriendsList = ( { userFriends, userFriendRequests, setUpdated, updated} ) 
   }
   return (
     <div id="friendsList">
-      <h1>FRIEND REQUESTS</h1>
+      <h1>Friend requests</h1>
       {friendRequestObjects && friendRequestObjects.map((friendRequest) => {
       return (
         <div key={friendRequest._id} id="friend">
@@ -102,7 +102,7 @@ const FriendsList = ( { userFriends, userFriendRequests, setUpdated, updated} ) 
         </div>
       )
       })}
-      <h1>FRIENDS</h1>
+      <h1>Friends</h1>
       {friendObjects && friendObjects.map((friend) => {
       return (
         <div key={friend._id} id="friend">
