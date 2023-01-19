@@ -148,35 +148,51 @@ describe("/posts", () => {
     })
   })
 
-  describe("GET, when token is missing", () => {
-    test("returns no posts", async () => {
+  describe("DELETE, when token is missing", () => {
+    test("throws an error", async () => {
       let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
       await post1.save();
-      await post2.save();
+      const post = await Post.findOne({message: "howdy!"})
       let response = await request(app)
-        .get("/posts");
-      expect(response.body.posts).toEqual(undefined);
-    })
-
-    test("the response code is 401", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
-      await post1.save();
-      await post2.save();
-      let response = await request(app)
-        .get("/posts");
+        .delete(`/posts/${post._id}`);
       expect(response.status).toEqual(401);
     })
 
-    test("does not return a new token", async () => {
+    test("it doesn't delete anything", async () => {
       let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
       await post1.save();
-      await post2.save();
+      const post = await Post.findOne({message: "howdy!"})
       let response = await request(app)
-        .get("/posts");
-      expect(response.body.token).toEqual(undefined);
+        .delete(`/posts/${post._id}`);
+      expect(response.status).toEqual(401);
+      const postStillThere = await Post.findOne({message: "howdy!"})
+      expect(postStillThere.message).toBe('howdy!')
     })
-  })
+  });
+
+  describe("DELETE, when token is present", () => {
+    test("response is 200", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      const post = await Post.findOne({message: "howdy!"})
+      let response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+      expect(response.status).toEqual(200);
+    })
+
+    test("deletes the post", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      const post = await Post.findOne({message: "howdy!"})
+      let response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+      expect(response.status).toEqual(200);
+      const postStillThere = await Post.findOne({message: "howdy!"})
+      expect(postStillThere).toBe(null)
+    })
+  });
 });

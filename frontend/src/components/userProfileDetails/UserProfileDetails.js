@@ -5,13 +5,14 @@ import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
 import FriendsList from "../friendsList/FriendsList";
 import { useParams } from "react-router-dom";
+import EditUserDetails from "../editUserDetails/EditUserDetails";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState(null);
   const [updated, setUpdated] = useState(null);
-
+  const [edit, setEdit] = useState(false)
   const [friendsView, setFriendsView] = useState(false);
   const [myProfilePage, setMyProfilePage] = useState(null);
   const [friendshipStatus, setFriendshipStatus] = useState(null);
@@ -87,6 +88,9 @@ const Profile = () => {
       });
     }
   };
+  const handleEdit = () => {
+    setEdit(!edit)
+  }
 
   return (
     <>
@@ -94,12 +98,15 @@ const Profile = () => {
         <h1>My details</h1>
         <p>Name: {user && user.name}</p>
         <p>About me: {user && user.aboutMe}</p>
-
-        {myProfilePage && <button onClick={viewFriends}>Friends List</button>}
+        {myProfilePage && 
+        <div>
+          <button onClick={handleEdit}>Edit profile deatils</button>
+          <button onClick={viewFriends}>Friends List</button>
+        </div>}
 
         <img src={image} id="profile-pics" alt="img" />
-      </div>
-      {!myProfilePage && friendshipStatus && `You and ${user.name} are friends`}
+
+        {!myProfilePage && friendshipStatus && `You and ${user.name} are friends`}
       {!myProfilePage &&
         friendshipRequestStatus &&
         `You and have requested to be friends with ${user.name}`}
@@ -108,6 +115,12 @@ const Profile = () => {
           Send friend request
         </button>
       )}
+      </div>
+      {
+        edit && (
+          <EditUserDetails currentUser={user} />
+        )
+      }
 
       {friendsView && (
         <FriendsList
@@ -131,7 +144,9 @@ const Profile = () => {
                   return new Date(postB.createdAt) - new Date(postA.createdAt);
                 })
                 .map((post) => (
-                  <Post setUpdated={setUpdated} post={post} key={post._id} />
+                  <div key={post._id}>
+                  <Post setUpdated={setUpdated} myProfilePage={myProfilePage} post={post} />
+                  </div>
                 ))}
           </div>
         </div>

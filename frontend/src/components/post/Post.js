@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import AddComment from '../addComment/AddComment'
 import './Post.css';
-import useLikes from './useLikes'
 
-const Post = ({post, setUpdated}) => {
+const Post = ({post, setUpdated, myProfilePage}) => {
   const [userName, setUserName] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   //const [error, setError] = useState(null);
@@ -55,7 +54,29 @@ const Post = ({post, setUpdated}) => {
     }
   }, [])
 
- 
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    if (token) {
+      const confirm = window.confirm("Are you sure you want to delete this post?");
+      if (!confirm) return;
+      const response = await fetch(`/posts/${post._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (response.ok) {
+        setUpdated(true)
+      } else {
+        alert("Error deleting post")
+        const data = await response.json();
+        console.log(data);
+      }
+    }
+  }
+
 
 
   const handleSubmit = (event) => { 
@@ -87,11 +108,10 @@ const Post = ({post, setUpdated}) => {
   const firstComment = post.comments.length===0?<p>Be the first to make a comment!</p>:<p>{post.comments[0].message}</p>
 
   const allComments = 
-  <div>
-    <p className="all-comments">
-      {post.comments.map((comments) => {return <p>{comments.message}</p>})}
-    </p>
-  </div>
+    <div className="all-comments">
+      {post.comments.map((comments) => {return <p key={comments.createdAt}>{comments.message}</p>})}
+    </div>
+
 
   const showCommentsLink=showComments?'Hide':'Show'
 
@@ -120,6 +140,7 @@ const Post = ({post, setUpdated}) => {
             <>&#128077; Like {post.likes.length > 0 && post.likes.length}</>
           )}
         </button>
+        {myProfilePage && <button id="like-button" onClick={handleDelete}>Delete</button>}
         <div>
           <div id='comments' role="comments">
             {!showComments && firstComment}
