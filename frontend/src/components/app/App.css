@@ -3,28 +3,26 @@
 * {
   margin: 0;
   font-family: "Quicksand";
-}
-
-.img {
-  position: absolute;
+  background-image: "./acebook.png";
 }
 
 .navbar {
-    background-color: rgba(11, 115, 227, 0.702);
-    padding: 40px;
+    background-color: black;
+    padding: 25px;
     display: flex;
     font-weight: bold;
-    justify-content: right;
+    justify-content: left;
   }
 
 .links li {
     list-style: none;
     display: inline-block;
     margin-right: 15px;
+    margin-top: 25px;
   }
   
   .links a {
     color: white;
     text-decoration: none;
   }
-  
+
