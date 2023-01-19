@@ -38,13 +38,27 @@ const PostsController = {
     const token = await TokenGenerator.jsonwebtoken(req.user_id)
     res.status(200).json({ message: 'OK', token: token });
   },
-  
   FindUsersPosts: async (req, res) => {
     const id = req.params.id;
     const posts = await Post.find({ author: id });
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(200).json({ message: "OK", token: token, posts: posts });
   },
+  Delete: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const deleted = await Post.deleteOne({ _id: id });
+      if (!deleted.deletedCount) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ message: "OK", token: token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error deleting post" });
+    }
+  }
+  
 };
 
 module.exports = PostsController;

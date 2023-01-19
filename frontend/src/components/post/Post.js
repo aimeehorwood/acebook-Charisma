@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import AddComment from '../addComment/AddComment'
 import './Post.css';
-import useLikes from './useLikes'
 
-const Post = ({post, setUpdated}) => {
+const Post = ({post, setUpdated, myProfilePage}) => {
   const [userName, setUserName] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   //const [error, setError] = useState(null);
@@ -55,7 +54,29 @@ const Post = ({post, setUpdated}) => {
     }
   }, [])
 
- 
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    if (token) {
+      const confirm = window.confirm("Are you sure you want to delete this post?");
+      if (!confirm) return;
+      const response = await fetch(`/posts/${post._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (response.ok) {
+        setUpdated(true)
+      } else {
+        alert("Error deleting post")
+        const data = await response.json();
+        console.log(data);
+      }
+    }
+  }
+
 
 
   const handleSubmit = (event) => { 
@@ -102,6 +123,7 @@ const Post = ({post, setUpdated}) => {
       })}
     </div>
 
+
   const showCommentsLink=showComments?'Hide':'Show'
 
   const commentForm =
@@ -132,6 +154,7 @@ const Post = ({post, setUpdated}) => {
             <>&#128077; Like {post.likes.length > 0 && post.likes.length}</>
           )}
         </button>
+        {myProfilePage && <button id="like-button" onClick={handleDelete}>Delete</button>}
         <div>
           <br></br>
           <div id='comments' role="comments">

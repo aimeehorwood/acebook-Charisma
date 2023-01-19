@@ -1,9 +1,9 @@
 #comment-button{
-    background-color: rgba(11, 115, 227, 0.702);
+    background-color: black;
     color: white;
     font-weight: bold;
-    padding: 5px 8px;
-    margin: 5px;
+    padding: 0px 5px;
+    margin-left: 5px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -18,5 +18,4 @@
     margin-right: 10px;
    
 }
-
 

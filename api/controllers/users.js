@@ -62,10 +62,24 @@ const friendRequest = async (req,res) => {
     const token = await TokenGenerator.jsonwebtoken(req.user_id)
     res.status(200).json({ message: 'OK', token: token });
   }
-
-
-
-
-
-module.exports = { signupUser, loginUser, findUser, friendRequest }
+  const editProfile = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { name, email, aboutMe, image } = req.body;
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: id }, 
+        { $set: { name, email, aboutMe, image } },
+        { new: true }
+      );
+      if (!updatedUser) {
+        return res.status(404).send({ message: "User not found" });
+      }
+      const token = await TokenGenerator.jsonwebtoken(id)
+      res.status(200).send({ message: "User updated successfully", updatedUser, token: token });
+    } catch (error) {
+      res.status(500).send({ message: "Error updating user", error });
+    }
+  };
+    
+module.exports = { signupUser, loginUser, findUser, friendRequest, editProfile }
 
