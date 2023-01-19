@@ -96,29 +96,37 @@ const Profile = () => {
     <>
       <div className="profile-details">
         <h1>My details</h1>
+        <br></br>
         <p>Name: {user && user.name}</p>
+        <br></br>
         <p>About me: {user && user.aboutMe}</p>
+        <br></br>
         {myProfilePage && 
         <div>
-          <button onClick={handleEdit}>Edit profile deatils</button>
-          <button onClick={viewFriends}>Friends List</button>
+          {!friendsView && <button id="like-button" onClick={handleEdit}>{edit? 'Close editing form' : 'Edit profile deatils'}</button>}
+          {!edit && <button id="like-button" onClick={viewFriends}>{friendsView? 'Close friends list' : 'Friends List'}</button>}
         </div>}
-
+          <br></br>
         <img src={image} id="profile-pics" alt="img" />
 
-        {!myProfilePage && friendshipStatus && `You and ${user.name} are friends`}
+        {!myProfilePage && friendshipStatus && 
+        <p>{`You and ${user.name} are friends`}</p>
+        }
       {!myProfilePage &&
         friendshipRequestStatus &&
-        `You and have requested to be friends with ${user.name}`}
+        <p>{`You and have requested to be friends with ${user.name}`}</p>
+        }
       {!myProfilePage && !friendshipRequestStatus && !friendshipStatus && (
-        <button onClick={(event) => handleFriendRequest(event, user._id)}>
+        <><p></p>
+        <button id="like-button" onClick={(event) => handleFriendRequest(event, user._id)}>
           Send friend request
         </button>
+        </>
       )}
-      </div>
+      
       {
         edit && (
-          <EditUserDetails currentUser={user} />
+          <EditUserDetails setEdit={setEdit} setUpdated={setUpdated} currentUser={user} />
         )
       }
 
@@ -131,7 +139,8 @@ const Profile = () => {
           currentUser={user}
         />
       )}
-      {!friendsView && (
+      </div>
+      {!(friendsView || edit) && (
         <div className="user-posts">
           <h2 id="post" className="feedHeader">
             My Posts

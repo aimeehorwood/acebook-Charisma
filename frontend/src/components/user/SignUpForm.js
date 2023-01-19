@@ -58,7 +58,7 @@ const SignUpForm = ({ navigate }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="form" onSubmit={handleSubmit}>
       <input
         required
         placeholder="Name"
@@ -93,6 +93,7 @@ const SignUpForm = ({ navigate }) => {
       {error && <div className="error">{error}</div>}
       <div>
         <h5> Select a Profile Picture for your Profile </h5>
+        <br></br>
         <img
           src={
             "https://www.shareicon.net/data/128x128/2016/11/28/857788_animal_512x512.png"

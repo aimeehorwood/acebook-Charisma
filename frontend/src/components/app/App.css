@@ -2,7 +2,7 @@
 
 * {
   margin: 0;
-  font-family: "Quicksand";
+  font-family: 'Quicksand';
 }
 
 .img {
@@ -10,21 +10,39 @@
 }
 
 .navbar {
-    background-color: rgba(11, 115, 227, 0.702);
-    padding: 40px;
-    display: flex;
-    font-weight: bold;
-    justify-content: right;
-  }
+  background-color: rgba(11, 115, 227, 0.702);
+  padding: 40px;
+  display: flex;
+  font-weight: bold;
+  justify-content: right;
+}
 
 .links li {
-    list-style: none;
-    display: inline-block;
-    margin-right: 15px;
-  }
-  
-  .links a {
-    color: white;
-    text-decoration: none;
-  }
-  
+  list-style: none;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.links a {
+  color: white;
+  text-decoration: none;
+}
+
+#form {
+  margin-top: 10px;
+  width: 80%;
+  padding: 20px;
+}
+
+#form input {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+#form input#aboutMe {
+  height: 100px;
+  width: 80%;
+}

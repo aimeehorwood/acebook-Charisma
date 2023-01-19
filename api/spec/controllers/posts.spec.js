@@ -195,4 +195,110 @@ describe("/posts", () => {
       expect(postStillThere).toBe(null)
     })
   });
+
+
+  //PATCH - likes and comments
+  describe("PATCH, when token is present for a like", () => {
+    test("response is 200 and adds a like", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      const post = await Post.findOne({message: "howdy!"})
+      let response = await request(app)
+        .patch(`/posts/${post._id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({value: 'myUserId', field: 'likes'});
+      expect(response.status).toEqual(200);
+      const updatedPost1 = await Post.findOne({message: "howdy!"});
+      expect(updatedPost1.likes.length).toBe(1)
+    })
+
+    test("response is 200 and removes like second time", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      const post = await Post.findOne({message: "howdy!"})
+      let response = await request(app)
+        .patch(`/posts/${post._id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({value: 'myUserId', field: 'likes'});
+      expect(response.status).toEqual(200);
+      const updatedPost1 = await Post.findOne({message: "howdy!"});
+      expect(updatedPost1.likes.length).toBe(1)
+      let response2 = await request(app)
+        .patch(`/posts/${post._id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({value: 'myUserId', field: 'likes'});
+      expect(response.status).toEqual(200);
+      const updatedPost2 = await Post.findOne({message: "howdy!"});
+      expect(updatedPost2.likes.length).toBe(0)
+    })
+    describe("PATCH, when token is not present for a like", () => {
+      test("response is 200 and adds a like", async () => {
+        let post1 = new Post({message: "howdy!"});
+        await post1.save();
+        const post = await Post.findOne({message: "howdy!"})
+        let response = await request(app)
+          .patch(`/posts/${post._id}`)
+          .set("Authorization", `Bearer `)
+          .send({value: 'myUserId', field: 'likes'});
+        expect(response.status).toEqual(401);
+        const updatedPost1 = await Post.findOne({message: "howdy!"});
+        expect(updatedPost1.likes.length).toBe(0)
+      })
+    })
+
+
+    describe("PATCH, when token is present for a comment", () => {
+      test("response is 200 and adds a comment", async () => {
+        let post1 = new Post({message: "howdy!"});
+        await post1.save();
+        const post = await Post.findOne({message: "howdy!"})
+        let response = await request(app)
+          .patch(`/posts/${post._id}`)
+          .set("Authorization", `Bearer ${token}`)
+          .send({value: 'comment', field: 'comments'});
+        expect(response.status).toEqual(200);
+        const updatedPost1 = await Post.findOne({message: "howdy!"});
+        expect(updatedPost1.comments.length).toBe(1)
+      })
+      test("response is 200 and adds second comment", async () => {
+        let post1 = new Post({message: "howdy!"});
+        await post1.save();
+        const post = await Post.findOne({message: "howdy!"})
+        let response = await request(app)
+          .patch(`/posts/${post._id}`)
+          .set("Authorization", `Bearer ${token}`)
+          .send({value: 'first', field: 'comments'});
+        expect(response.status).toEqual(200);
+        const updatedPost1 = await Post.findOne({message: "howdy!"});
+        expect(updatedPost1.comments.length).toBe(1)
+        let response2 = await request(app)
+          .patch(`/posts/${post._id}`)
+          .set("Authorization", `Bearer ${token}`)
+          .send({value: 'second', field: 'comments'});
+        expect(response.status).toEqual(200);
+        const updatedPost2 = await Post.findOne({message: "howdy!"});
+        expect(updatedPost2.comments.length).toBe(2)
+      })
+      describe("PATCH, when token is not present for a comment", () => {
+        test("response is 200 and adds a like", async () => {
+          let post1 = new Post({message: "howdy!"});
+          await post1.save();
+          const post = await Post.findOne({message: "howdy!"})
+          let response = await request(app)
+            .patch(`/posts/${post._id}`)
+            .set("Authorization", `Bearer `)
+            .send({value: 'myUserId', field: 'comments'});
+          expect(response.status).toEqual(401);
+          const updatedPost1 = await Post.findOne({message: "howdy!"});
+          expect(updatedPost1.comments.length).toBe(0)
+        })
+      })
+    })
+
+
+
+    
+  });
+
+
 });
