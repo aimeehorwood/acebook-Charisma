@@ -111,7 +111,7 @@ const Post = ({post, setUpdated, myProfilePage}) => {
   const firstComment = post.comments.length === 0 ? <p id ="first-comment">Be the first to make a comment!</p> :
   <p className ="bubble-post">
     <Link to={`../profile/${post.comments[0].user_id}`}><b>{post.comments[0].name}</b></Link>: {post.comments[0].message}
-    <br></br><br></br><i>{formatDistanceToNow(new Date(post.comments[0].createdAt), {addSuffix: true})}</i>
+    <br></br><br></br><i style={{ fontSize: '13px' }}>{formatDistanceToNow(new Date(post.comments[0].createdAt), {addSuffix: true})}</i>
   </p>
 
  
@@ -119,7 +119,7 @@ const Post = ({post, setUpdated, myProfilePage}) => {
     <div className="bubble-post">
       {post.comments.map((comments) => {
        return <p key={comments}> 
-       <Link to={`../profile/${comments.user_id}`}><b>{comments.name}</b></Link>: {comments.message} <br></br><br></br> <i> {`${formatDistanceToNow(new Date(comments.createdAt), {addSuffix: true})}`} </i> <br></br><br></br></p>
+       <Link to={`../profile/${comments.user_id}`}><b>{comments.name}</b></Link>: {comments.message} <br></br><br></br> <i style={{ fontSize: '13px' }}> {`${formatDistanceToNow(new Date(comments.createdAt), {addSuffix: true})}`} </i> <br></br><br></br></p>
       })}
     </div>
 
@@ -140,12 +140,12 @@ const Post = ({post, setUpdated, myProfilePage}) => {
       <article data-cy="post" key={ post._id }>
       <p id="userName">
         <img src={image} id="profile-pics" alt="img" />
-        <Link to={`../profile/${post.author}`}>{userName}</Link>
+        <Link to={`../profile/${post.author}`} style={{ fontSize: '30px' }}>{userName}</Link>
       </p>
       <br></br>
-      <p>{post.message}</p>
+      <p id='message-style' style={{fontSize: '24px'}}>{post.message}</p>
       <br></br>
-      <p className='timePosted'>Posted: {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
+      <p id='timePosted' style={{ fontSize: '13px', fontStyle: 'italic' }}>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
       <br></br>
        <button onClick={handleLikes} id="like-button">
           {hasBeenLiked() ? (

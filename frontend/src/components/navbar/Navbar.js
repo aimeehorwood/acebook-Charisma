@@ -35,6 +35,9 @@ const Navbar = () => {
     return (
       <nav className="navbar">
         <div className="links">
+        <a>
+          <img src={logo} alt="logo" />
+        </a>
           <li>
             <Link to="/login">Login</Link>
           </li>
