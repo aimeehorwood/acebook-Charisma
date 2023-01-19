@@ -7,17 +7,22 @@ import FriendsList from "../friendsList/FriendsList"
 import { useParams } from 'react-router-dom';
 
 
+
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState(null);
   const [updated, setUpdated] = useState(null)
+
   const [friendsView, setFriendsView] = useState(false)
   const [myProfilePage, setMyProfilePage] = useState(null)
   const [friendshipStatus, setFriendshipStatus] = useState(null)
   const [friendshipRequestStatus, setFriendshipRequestStatus] = useState(null)
   const [friends, setFriends] = useState(null)
   const [friendRequests, setFriendRequests] = useState(null)
+  const [image, setImageUrl] = useState("");
+
+
 
   let { id } = useParams();
 
@@ -29,16 +34,15 @@ const Profile = () => {
         .then(async (data) => {
           setToken(window.localStorage.getItem("token"));
           setUser(data.user);
+
           setMyProfilePage(id===window.localStorage.getItem("user_id"))
           await setFriendshipRequestStatus(data.user.friendRequests.includes(window.localStorage.getItem("user_id")))
           await setFriendshipStatus(data.user.friends.includes(window.localStorage.getItem("user_id")))
-          console.log(data.user.friends)
-          console.log(data.user.friendRequests)
+        
           await setFriends(data.user.friends)
           await setFriendRequests(data.user.friendRequests)
-          console.log(friends)
-          console.log(`req status = ${friendshipRequestStatus}`)
-          console.log(`friend status = ${friendshipStatus}`)
+          setImageUrl(data.user.image);
+
         });
     }
   }, [id,updated]);
@@ -90,7 +94,12 @@ const Profile = () => {
       <h1>My details</h1>
       <p>Name: {user && user.name}</p>
       <p>About me: {user && user.aboutMe}</p>
+
       {myProfilePage && <button onClick={viewFriends}>Friends List</button>}
+
+      <img src={image} id="profile-pics" alt="img" />
+      <button>Friends List</button>
+
     </div>
     {(!myProfilePage && friendshipStatus) && (
       `You and ${user.name} are friends`
