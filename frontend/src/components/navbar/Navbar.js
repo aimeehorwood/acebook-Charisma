@@ -9,7 +9,7 @@ const Navbar = () => {
 
   if (window.localStorage.getItem("token")) {
     return (
-
+      
       <nav className="navbar">
         <div className="links">
           <li>

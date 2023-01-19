@@ -1,0 +1,38 @@
+.homepage-contents {
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 10px;
+}
+
+#img {
+  size: 500px;
+}
+
+#h1 {
+  text-align: center;
+}
+
+#sign-up {
+  background-color: rgba(11, 115, 227, 0.702);
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-inline-end: auto;
+}
+
+#login {
+  background-color: rgba(11, 115, 227, 0.702);
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-inline-end: auto;
+}
+
