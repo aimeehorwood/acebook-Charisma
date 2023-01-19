@@ -73,25 +73,26 @@ const Post = ({post, setUpdated}) => {
           'value': {
             'user_id': window.localStorage.getItem('user_id'),
             'message': `${body}`,
-            'createdAt': `${new Date()}`
-          }
+            'createdAt': `${new Date()}`,
+            'name': window.localStorage.getItem('user_name')
+        
+          },
         })
       }).then(() => {
         setUpdated(true)
         setBody('') 
+   
         
       })
       }
   }
 
-  const firstComment = post.comments.length===0?<p>Be the first to make a comment!</p>:<p>{post.comments[0].message}</p>
+  const firstComment = post.comments.length===0?<p id ="first-comment">Be the first to make a comment!</p>:<p>{post.comments[0].message}</p>
 
   const allComments = 
-  <div>
-    <p className="all-comments">
-      {post.comments.map((comments) => {return <p>{comments.message}</p>})}
-    </p>
-  </div>
+    <div className="all-comments">
+      {post.comments.map((comments) => {return <p key={comments}>{comments.name} : {comments.message}</p>})}
+    </div>
 
   const showCommentsLink=showComments?'Hide':'Show'
 

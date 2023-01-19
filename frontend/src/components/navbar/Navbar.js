@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "./acebook_logo.png"
 
 const Navbar = () => {
   const handleLogout = () => {
@@ -13,7 +14,10 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="links">
           <li>
-            <Link to="/posts">Posts</Link>
+            <img src={logo} alt="logo"/>
+          </li>
+          <li>
+            <Link to="/posts">Feed</Link>
           </li>
           <li>
             <Link to={`profile/${window.localStorage.getItem("user_id")}`}>My Profile</Link>

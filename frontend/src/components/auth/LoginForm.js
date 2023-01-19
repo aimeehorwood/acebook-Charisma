@@ -19,6 +19,7 @@ const LogInForm = ({ navigate }) => {
       body: JSON.stringify({ email: email, password: password })
     })
     const data = await response.json()
+    window.localStorage.setItem("user_name", data.user.name)
     if(response.status !== 200) {
       setError(data.error)
       navigate('/login')
@@ -26,6 +27,7 @@ const LogInForm = ({ navigate }) => {
       window.localStorage.setItem("token", data.token)
 
       window.localStorage.setItem("user_id", data.user._id)
+
       navigate('/posts');
     }
   }
