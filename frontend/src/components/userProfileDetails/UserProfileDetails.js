@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import './UserProfileDetails.css';
+import "./UserProfileDetails.css";
 import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
 import FriendsList from "../friendsList/FriendsList";
@@ -12,7 +12,7 @@ const Profile = () => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState(null);
   const [updated, setUpdated] = useState(null);
-  const [edit, setEdit] = useState(false)
+  const [edit, setEdit] = useState(false);
   const [friendsView, setFriendsView] = useState(false);
   const [myProfilePage, setMyProfilePage] = useState(null);
   const [friendshipStatus, setFriendshipStatus] = useState(null);
@@ -89,8 +89,8 @@ const Profile = () => {
     }
   };
   const handleEdit = () => {
-    setEdit(!edit)
-  }
+    setEdit(!edit);
+  };
 
   return (
     <>
@@ -101,47 +101,61 @@ const Profile = () => {
         <br></br>
         <p>About me: {user && user.aboutMe}</p>
         <br></br>
-<img src={image} id="profile-pics" alt="img" />
-        <br></br><br></br>
-        {myProfilePage && 
-        <div>
-          {!friendsView && <button id="like-button" onClick={handleEdit}>{edit? 'Close editing form' : 'Edit profile deatils'}</button>}
-          {!edit && <button id="like-button" onClick={viewFriends}>{friendsView? 'Close friends list' : 'Friends List'}</button>}
-        </div>}
-          <br></br>
         <img src={image} id="profile-pics" alt="img" />
+        <br></br>
+        <br></br>
+        {myProfilePage && (
+          <div>
+            {!friendsView && (
+              <button id="like-button" onClick={handleEdit}>
+                {edit ? "Close editing form" : "Edit profile details"}
+              </button>
+            )}
+            {!edit && (
+              <button id="like-button" onClick={viewFriends}>
+                {friendsView ? "Close friends list" : "Friends List"}
+              </button>
+            )}
+          </div>
+        )}
+        <br></br>
 
-        {!myProfilePage && friendshipStatus && 
-        <p>{`You and ${user.name} are friends`}</p>
-        }
+        {!myProfilePage && friendshipStatus && (
+          <p>{`You and ${user.name} are friends`}</p>
+        )}
 
-      {!myProfilePage &&
-        friendshipRequestStatus &&
-        <p>{`You and have requested to be friends with ${user.name}`}</p>
-        }
-      {!myProfilePage && !friendshipRequestStatus && !friendshipStatus && (
-        <><p></p>
-        <button id="like-button" onClick={(event) => handleFriendRequest(event, user._id)}>
-          Send friend request
-        </button>
-        </>
-      )}
-      
-      {
-        edit && (
-          <EditUserDetails setEdit={setEdit} setUpdated={setUpdated} currentUser={user} />
-        )
-      }
+        {!myProfilePage && friendshipRequestStatus && (
+          <p>{`You and have requested to be friends with ${user.name}`}</p>
+        )}
+        {!myProfilePage && !friendshipRequestStatus && !friendshipStatus && (
+          <>
+            <p></p>
+            <button
+              id="like-button"
+              onClick={(event) => handleFriendRequest(event, user._id)}
+            >
+              Send friend request
+            </button>
+          </>
+        )}
 
-      {friendsView && (
-        <FriendsList
-          userFriends={friends}
-          userFriendRequests={friendRequests}
-          updated={updated}
-          setUpdated={setUpdated}
-          currentUser={user}
-        />
-      )}
+        {edit && (
+          <EditUserDetails
+            setEdit={setEdit}
+            setUpdated={setUpdated}
+            currentUser={user}
+          />
+        )}
+
+        {friendsView && (
+          <FriendsList
+            userFriends={friends}
+            userFriendRequests={friendRequests}
+            updated={updated}
+            setUpdated={setUpdated}
+            currentUser={user}
+          />
+        )}
       </div>
       {!(friendsView || edit) && (
         <div className="user-posts">
@@ -157,7 +171,11 @@ const Profile = () => {
                 })
                 .map((post) => (
                   <div key={post._id}>
-                  <Post setUpdated={setUpdated} myProfilePage={myProfilePage} post={post} />
+                    <Post
+                      setUpdated={setUpdated}
+                      myProfilePage={myProfilePage}
+                      post={post}
+                    />
                   </div>
                 ))}
           </div>
