@@ -124,14 +124,16 @@ const Profile = () => {
             My Posts
           </h2>
           {myProfilePage && <CreatePost setUpdated={setUpdated} />}
-          <div key={posts._id} role="feed">
+          <div id="feed" role="feed">
             {posts &&
               posts
                 .sort(function (postA, postB) {
                   return new Date(postB.createdAt) - new Date(postA.createdAt);
                 })
                 .map((post) => (
-                  <Post setUpdated={setUpdated} post={post} />
+                  <div key={post._id}>
+                  <Post setUpdated={setUpdated} myProfilePage={myProfilePage} post={post} />
+                  </div>
                 ))}
           </div>
         </div>
