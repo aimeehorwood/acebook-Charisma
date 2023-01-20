@@ -18,15 +18,12 @@ const LogInForm = ({ navigate }) => {
       body: JSON.stringify({ email: email, password: password })
     })
     const data = await response.json()
-    window.localStorage.setItem("user_name", data.user.name)
     if(response.status !== 200) {
       setError(data.error)
-      navigate('/login')
     } else {
       window.localStorage.setItem("token", data.token)
-
       window.localStorage.setItem("user_id", data.user._id)
-
+      window.localStorage.setItem("user_name", data.user.name)
       navigate('/posts');
     }
   }
@@ -45,7 +42,7 @@ const LogInForm = ({ navigate }) => {
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input role='submit-button' id='like-button' type="submit" value="Submit" />
-        {error && <div className="error">{error}</div>}
+        {error && <div className="error">{error}!</div>}
       </form>
     );
 }

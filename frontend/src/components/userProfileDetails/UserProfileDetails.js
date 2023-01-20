@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./UserProfileDetails.css";
 import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
@@ -47,6 +46,11 @@ const Profile = () => {
         });
     }
   }, [id, updated]);
+
+  useEffect(() => {
+    setFriendsView(false)
+  },[id])
+
 
   useEffect(() => {
     if (token) {
@@ -149,6 +153,7 @@ const Profile = () => {
 
         {friendsView && (
           <FriendsList
+            setFriendsView={setFriendsView}
             userFriends={friends}
             userFriendRequests={friendRequests}
             updated={updated}
@@ -159,9 +164,9 @@ const Profile = () => {
       </div>
       {!(friendsView || edit) && (
         <div className="user-posts">
-          <h2 id="post" className="feedHeader">
-            My Posts
-          </h2>
+          {posts && <h2 id="post" className="feedHeader">
+          {posts.length === 0 ? 'No posts yet...' : 'My Posts'}
+          </h2>}
           {myProfilePage && <CreatePost setUpdated={setUpdated} />}
           <div id="feed" role="feed">
             {posts &&
