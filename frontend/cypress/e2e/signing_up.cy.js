@@ -5,7 +5,7 @@ describe("Signing up", () => {
     cy.get("#aboutMe").type("from somewhere");
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("Password123!");
-    cy.get("#submit").click();
+    cy.get(".detailsSubmit").click();
     cy.url().should("include", "/login");
   });
 
@@ -14,7 +14,7 @@ describe("Signing up", () => {
     cy.get("#name").type("someone");
     cy.get("#aboutMe").type("from somewhere");
     cy.get("#email").type("someone@example.com");
-    cy.get("#submit").click();
+    cy.get(".detailsSubmit").click();
 
     cy.url().should("include", "/signup");
   });
@@ -24,8 +24,7 @@ describe("Signing up", () => {
     cy.get("#aboutMe").type("from somewhere");
     cy.visit("/signup");
     cy.get("#password").type("Password123!");
-    cy.get("#submit").click();
-
+    cy.get(".detailsSubmit").click();
     cy.url().should("include", "/signup");
   });
 });

@@ -66,7 +66,6 @@ const Post = ({ post, setUpdated, myProfilePage }) => {
       } else {
         alert('Error deleting post')
         const data = await response.json()
-        console.log(data)
       }
     }
   }
@@ -87,7 +86,7 @@ const Post = ({ post, setUpdated, myProfilePage }) => {
           {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
         </p>
         <br></br>
-        <button onClick={handleLikes} id="like-button">
+        <button onClick={handleLikes} className="likebtn" id="like-button">
           {hasBeenLiked() ? (
             <>&#128078; Unlike {post.likes.length > 0 && post.likes.length}</>
           ) : (

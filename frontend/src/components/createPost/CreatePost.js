@@ -32,7 +32,7 @@ const CreatePost = ({setUpdated}) => {
       <form id ='input' onSubmit={handleSubmit}>
         <textarea id='input' rows="4" value={body} onChange={(event) => setBody(event.target.value)} />
         <br></br>
-        <button id="like-button" type="submit" value="Submit">Post</button>
+        <button id="like-button" type="submit" value="Submit" className="post-button">Post</button>
       </form>
     </div>
   );
