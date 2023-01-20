@@ -38,7 +38,6 @@ const findUser = async (req, res) => {
 const friendRequest = async (req,res) => {
     profile_id = req.params.id
     requester_id = req.body.requester
-    console.log(requester_id)
     field = req.body.field
     if (field === 'request') {
       const user = await User.findOne({_id: profile_id})
@@ -71,9 +70,6 @@ const friendRequest = async (req,res) => {
         { $set: { name, email, aboutMe, image } },
         { new: true }
       );
-      if (!updatedUser) {
-        return res.status(404).send({ message: "User not found" });
-      }
       const token = await TokenGenerator.jsonwebtoken(id)
       res.status(200).send({ message: "User updated successfully", updatedUser, token: token });
     } catch (error) {

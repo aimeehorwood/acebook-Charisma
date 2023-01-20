@@ -143,7 +143,7 @@ const Post = ({post, setUpdated, myProfilePage}) => {
         <Link to={`../profile/${post.author}`}>{userName}</Link>
       </p>
       <br></br>
-      <p>{post.message}</p>
+      <p id="postMessageContent">{post.message}</p>
       <br></br>
       <p className='timePosted'>Posted: {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
       <br></br>

@@ -6,14 +6,13 @@ const Navbar = () => {
   const handleLogout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user_id");
+    window.localStorage.removeItem("user_name");
   };
 
   if (window.localStorage.getItem("token")) {
     return (
       <nav className="navbar">
-        <a>
           <img src={logo} alt="logo" />
-        </a>
         <div className="links">
           <li>
             <Link to="/posts">Feed</Link>
@@ -34,6 +33,8 @@ const Navbar = () => {
   } else {
     return (
       <nav className="navbar">
+                  <img src={logo} alt="logo" />
+
         <div className="links">
           <li>
             <Link to="/login">Login</Link>
