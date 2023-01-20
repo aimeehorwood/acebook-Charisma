@@ -128,7 +128,7 @@ const FriendsList = ( { userFriends, userFriendRequests, setUpdated, updated, se
     
       {friendObjects.length > 0 && 
     (<>
-      <h1>Friends</h1>
+      <h1>My deck &#9824;&#9830;&#9827;&#9829;&#127183;</h1>
       <br></br>
       <div id="friendsList">
       {friendObjects && friendObjects.map((friend) => {
