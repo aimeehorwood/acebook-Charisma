@@ -57,7 +57,7 @@ const Comments = ({ post, token, setUpdated }) => {
     <div className="bubble-post">
       {post.comments.map((comments) => {
         return (
-          <p key={comments}>
+          <p key={comments.createdAt}>
             <Link to={`../profile/${comments.user_id}`}>
               <b>{comments.name}</b>
             </Link>
