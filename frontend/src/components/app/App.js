@@ -5,7 +5,7 @@ import SignUpForm from "../user/SignUpForm";
 import Feed from "../feed/Feed";
 import Home from "../home/Home";
 import Navbar from "../navbar/Navbar";
-import UserProfileDetails from "../userProfileDetails/UserProfileDetails"
+import Profile from "../userProfile/UserProfile"
 
 import { useNavigate, Routes, Route } from "react-router-dom";
 
@@ -27,7 +27,7 @@ const App = () => {
           />
           <Route
             path="/profile/:id"
-            element={<UserProfileDetails navigate={useNavigate()} />}
+            element={<Profile navigate={useNavigate()} />}
           />
         </Routes>
       </div>
