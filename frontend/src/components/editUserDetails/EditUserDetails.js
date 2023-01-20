@@ -92,44 +92,53 @@ const EditUserDetails = ({ currentUser, setEdit, setUpdated }) => {
           <option value="noChange">
             Don't change Profile picture
           </option>
-          <option value="https://www.shareicon.net/data/128x128/2016/11/28/857788_animal_512x512.png">
-            Option 1
+          <option value="https://www.shareicon.net/data/128x128/2016/08/01/640375_smile_512x512.png">
+            Happy
           </option>
-          <option value="https://www.shareicon.net/data/128x128/2016/11/28/857792_animal_512x512.png">
-            Option 2
+          <option value="https://www.shareicon.net/data/128x128/2016/08/01/640384_heart_496x512.png">
+            Love
           </option>
-          <option value="https://www.shareicon.net/data/128x128/2016/12/20/863853_snake_512x512.png">
-            Option 3
+          <option value="https://www.shareicon.net/data/128x128/2016/08/01/640380_emoticon_512x512.png">
+            Sad
           </option>
-          <option value="https://www.shareicon.net/data/128x128/2017/01/06/868266_bug_512x512.png">
-            Option 4
+          <option value="https://www.shareicon.net/data/128x128/2016/08/01/640378_emoticon_512x512.png">
+            Shock
+          </option>
+          <option value="https://www.shareicon.net/data/128x128/2016/08/01/640382_emoticon_512x512.png">
+            Angry
           </option>
         </select>
         <br></br>
         <img
           src={
-            "https://www.shareicon.net/data/128x128/2016/11/28/857788_animal_512x512.png"
+            "https://www.shareicon.net/data/128x128/2016/08/01/640375_smile_512x512.png"
           }
           alt="profile"
         />
         <img
           src={
-            "https://www.shareicon.net/data/128x128/2016/11/28/857792_animal_512x512.png"
+            "https://www.shareicon.net/data/128x128/2016/08/01/640384_heart_496x512.png"
           }
           alt="profile"
         />
         <img
           src={
-            "https://www.shareicon.net/data/128x128/2016/12/20/863853_snake_512x512.png"
+            "https://www.shareicon.net/data/128x128/2016/08/01/640380_emoticon_512x512.png"
           }
           alt="profile"
         />
         <img
           src={
-            "https://www.shareicon.net/data/128x128/2017/01/06/868266_bug_512x512.png"
+            "https://www.shareicon.net/data/128x128/2016/08/01/640378_emoticon_512x512.png"
           }
           alt="profile"
-        />        
+        />
+         <img
+          src={
+            "https://www.shareicon.net/data/128x128/2016/08/01/640382_emoticon_512x512.png"
+          }
+          alt="profile"
+        />  
         
         
       </div>
