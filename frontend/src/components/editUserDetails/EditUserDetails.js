@@ -66,7 +66,7 @@ const EditUserDetails = ({ currentUser, setEdit, setUpdated }) => {
         value={name}
         onChange={handleNameChange}
       />
-      <input
+      <textarea
         required
         placeholder="About me"
         id="aboutMe"
@@ -82,10 +82,29 @@ const EditUserDetails = ({ currentUser, setEdit, setUpdated }) => {
         value={email}
         onChange={handleEmailChange}
       />
-      <input id="like-button" type="submit" value="Submit" />
+      <input id="like-button" type="submit" value="Submit" className="detailsSubmit"/>
       {error && <div className="error">{error}</div>}
-      <div>
+      <br></br>
+      <div id="choosePic">
         <h5> Select a Profile Picture for your Profile </h5>
+        <br></br>
+        <select id="selectList" onChange={handleImageChange}>
+          <option value="noChange">
+            Don't change Profile picture
+          </option>
+          <option value="https://www.shareicon.net/data/128x128/2016/11/28/857788_animal_512x512.png">
+            Option 1
+          </option>
+          <option value="https://www.shareicon.net/data/128x128/2016/11/28/857792_animal_512x512.png">
+            Option 2
+          </option>
+          <option value="https://www.shareicon.net/data/128x128/2016/12/20/863853_snake_512x512.png">
+            Option 3
+          </option>
+          <option value="https://www.shareicon.net/data/128x128/2017/01/06/868266_bug_512x512.png">
+            Option 4
+          </option>
+        </select>
         <br></br>
         <img
           src={
@@ -112,23 +131,7 @@ const EditUserDetails = ({ currentUser, setEdit, setUpdated }) => {
           alt="profile"
         />        
         
-        <select id="selectList" onChange={handleImageChange}>
-          <option value="noChange">
-            Don't change Profile picture
-          </option>
-          <option value="https://www.shareicon.net/data/128x128/2016/11/28/857788_animal_512x512.png">
-            Option 1
-          </option>
-          <option value="https://www.shareicon.net/data/128x128/2016/11/28/857792_animal_512x512.png">
-            Option 2
-          </option>
-          <option value="https://www.shareicon.net/data/128x128/2016/12/20/863853_snake_512x512.png">
-            Option 3
-          </option>
-          <option value="https://www.shareicon.net/data/128x128/2017/01/06/868266_bug_512x512.png">
-            Option 4
-          </option>
-        </select>
+        
       </div>
     </form>
   );

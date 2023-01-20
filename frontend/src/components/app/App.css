@@ -7,18 +7,22 @@
 }
 
 #form input {
-  margin-left: 10px;
-  margin-bottom: 10px;
+  display: block; /* Make inputs take up full width and stack vertically */
+  width: 80%;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 10px;
+  margin: 10px auto 10px auto;
 }
 
-#form input#aboutMe {
-  height: 100px;
-  width: 80%;
-}
-
+  #form #aboutMe {
+    height: 100px;
+    width: 80%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 0px auto 0px auto;
+  }
 
 .navbar {
     background-color: black;
@@ -40,3 +44,21 @@
     text-decoration: none;
   }
 
+#choosePic {
+  margin: auto;
+  margin-bottom: 100px;
+  
+}
+
+#selectList {
+  margin-bottom: 15px;;
+}
+
+#like-button.detailsSubmit {
+  width: 82%;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
