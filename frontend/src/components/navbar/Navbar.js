@@ -15,7 +15,7 @@ const Navbar = () => {
           <img src={logo} alt="logo" />
         <div className="links">
           <li>
-            <Link to="/posts">Feed</Link>
+            <Link to="/feed">Feed</Link>
           </li>
           <li>
             <Link to={`profile/${window.localStorage.getItem("user_id")}`}>
@@ -33,12 +33,8 @@ const Navbar = () => {
   } else {
     return (
       <nav className="navbar">
-                  <img src={logo} alt="logo" />
-
+        <img src={logo} alt="logo" />
         <div className="links">
-        <a>
-          <img src={logo} alt="logo" />
-        </a>
           <li>
             <Link to="/login">Login</Link>
           </li>

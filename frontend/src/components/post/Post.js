@@ -129,6 +129,7 @@ const Post = ({post, setUpdated, myProfilePage}) => {
   const commentForm =
   <form id ='input' onSubmit={handleSubmit}>
     <textarea id='input' rows="2" value={body} onChange={(event) => setBody(event.target.value)} />
+    <br></br>
     <button id="comment-button" type="submit" value="Submit">Comment</button>
   </form>
 
